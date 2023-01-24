@@ -1,6 +1,7 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'package:polcompballbot/database/database.dart';
+import 'package:polcompballbot/managers/localization.dart';
 
 import '../objects/countries.dart';
 
@@ -25,14 +26,7 @@ localizationsDescription:
   String region = event.getArg("region").value;
 
   if (Countries().get(region) == null) {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Regional-code wurde nicht erkannt."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("Could not find region code."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("region_code_not_found", event.interaction.locale)));
     return;
   }
 

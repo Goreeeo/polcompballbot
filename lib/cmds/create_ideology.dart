@@ -2,6 +2,7 @@ import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'package:polcompballbot/database/database.dart';
 import 'package:polcompballbot/database/string_to_ideology.dart';
+import 'package:polcompballbot/managers/localization.dart';
 
 final createIdeologyCommand = SlashCommandBuilder("create_ideology", "Creates an ideology.", 
 [
@@ -36,29 +37,14 @@ localizationsDescription: {
   String name = event.getArg("name").value;
 
   if (StringIdeologyConverter().getIdeology(name) is int) {
-    print(event.interaction.locale);
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Ideology existiert bereits."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("Ideology already exists."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("ideology_exists_already", event.interaction.locale)));
     return;
   }
 
   String link = event.getArg("polcompball_link").value;
 
   if (!link.toLowerCase().startsWith("https://polcompballanarchy.miraheze.org/wiki/") && !link.toLowerCase().startsWith("https://polcompball.miraheze.org/wiki/") && !link.toLowerCase().startsWith("polcompballanarchy.miraheze.org/wiki/") && !link.toLowerCase().startsWith("polcompball.miraheze.org/wiki/")) {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Artikel muss zu einem https://polcompball.miraheze.org oder https://polcompballanarchy.miraheze.org Artikel führen."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("Link must lead to a https://polcompball.miraheze.org or https://polcompballanarchy.miraheze.org article."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("invalid_pcb_link", event.interaction.locale)));
     return;
   }
 

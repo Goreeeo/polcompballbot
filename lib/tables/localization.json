@@ -3,8 +3,156 @@
         "en": "Invalid SapplyValues link.",
         "de": "Ungültiger SapplyValues Link."
     },
+    "successful_sapply": {
+        "en": "Set SapplyValues link successfully.",
+        "de": "Erfolgreich SapplyValues Link hinzugefügt."
+    },
+    "invalid_dozen": {
+        "en": "Invalid DozenValues link.",
+        "de": "Ungültiger DozenValues Link."
+    },
+    "successful_dozen": {
+        "en": "Set DozenValues link successfully.",
+        "de": "Erfolgreich DozenValues Link hinzugefügt."
+    },
+    "invalid_econ": {
+        "en": "Invalid EconValues link.",
+        "de": "Ungültiger EconValues Link."
+    },
+    "successful_econ": {
+        "en": "Set EconValues link successfully.",
+        "de": "Erfolgreich EconValues Link hinzugefügt."
+    },
     "invalid_eight_values": {
         "en": "Invalid 8Values link.",
         "de": "Ungültiger 8Values Link."
+    },
+    "successful_eight_values": {
+        "en": "Set 8Values link successfully.",
+        "de": "Erfolgreich 8Values Link hinzugefügt."
+    },
+    "invalid_political_compass": {
+        "en": "Invalid political compass link.",
+        "de": "Ungültiger politischer Kompass Link."
+    },
+    "successful_political_compass": {
+        "en": "Set political compass link successfully.",
+        "de": "Erfolgreich politischen Kompass Link hinzugefügt."
+    },
+    "ideology_exists_already": {
+        "en": "Ideology already exists.",
+        "de": "Ideologie existiert bereits."
+    },
+    "invalid_pcb_link": {
+        "en": "Link must lead to a https://polcompball.miraheze.org or https://polcompballanarchy.miraheze.org article.",
+        "de": "Artikel muss zu einem https://polcompball.miraheze.org oder https://polcompballanarchy.miraheze.org Artikel führen."
+    },
+    "no_polcompball_associated": {
+        "en": "This user does not have a PolCompBall associated with them.",
+        "de": "Dieser Nutzer hat keinen assoziierten PolCompBall."
+    },
+    "ideology_not_in_database": {
+        "en": "Ideology doesn't exist in database. Check your spelling or create it by using the /create_ideology command.",
+        "de": "Ideologie existiert nicht in der Datenbank. Überprüfe deine Rechtschreibung oder erstelle eine neue mit dem /erstelle_ideologie command."
+    },
+    "region_code_not_found": {
+        "en": "Could not find region code.",
+        "de": "Regional-code wurde nicht erkannt."
+    },
+    "polcompball_server_issue": {
+        "en": "There was an issue accessing the polcompball servers.",
+        "de": "Es gab ein Problem dabei auf die PolCompBall Server zuzugreifen."
+    },
+    "profile_ideology": {
+        "en": "Ideology",
+        "de": "Ideologie"
+    },
+    "profile_summary": {
+        "en": "Summary",
+        "de": "Kurzfassung"
+    },
+    "dozen_value_ownership": {
+        "en": "Ownership - Equality/Property",
+        "de": "Besitz - Gleichheit/Eigentum"
+    },
+    "dozen_value_market": {
+        "en": "Market - Coordination/Commerce",
+        "de": "Markt - Koordiniert/Handel"
+    },
+    "dozen_value_power": {
+        "en": "Power - Dominion/Anarchy",
+        "de": "Staatsmacht - Herrschaft/Anarchie"
+    },
+    "dozen_value_autonomy": {
+        "en": "Autonomy - Permission/Restriction",
+        "de": "Autonomie - Freiheit/Einschränkung"
+    },
+    "dozen_value_identity": {
+        "en": "Identity - Inclusivity/Supremacy",
+        "de": "Identität - Inklusivität/Vorherrschaft"
+    },
+    "dozen_value_progress": {
+        "en": "Progress - Heritage/Novelty",
+        "de": "Fortschritt - Erbschaft/Neuheit"
+    },
+    "left_right": {
+        "en": "Left/Right",
+        "de": "Links/Rechts"
+    },
+    "auth_lib": {
+        "en": "Authoritarian/Libertarian",
+        "de": "Autoritär/Libertär"
+    },
+    "prog_con": {
+        "en": "Progressive/Conservative",
+        "de": "Progressiv/Konservativ"
+    },
+    "econ_value_incentive": {
+        "en": "Incentive - Equity/Competition",
+        "de": "Anreiz - Gerechtigkeit/Konkurrenz"
+    },
+    "econ_value_structure": {
+        "en": "Structure - Horizontal/Hierarchy",
+        "de": "Struktur - Horizontal/Hierarchie"
+    },
+    "econ_value_intervention": {
+        "en": "Intervention - Demand/Regulation",
+        "de": "Eingriff - Nachfrage/Regulation"
+    },
+    "econ_value_centralisation": {
+        "en": "Centralisation - Central/Local",
+        "de": "Zentralisierung - Zentral/Örtlich"
+    },
+    "econ_value_technology": {
+        "en": "Technology - Automation/Employment",
+        "de": "Technologie - Automatisierung/Angestellte"
+    },
+    "econ_value_land": {
+        "en": "Land - Commons/Rent",
+        "de": "Land - Gemeinde/Miete"
+    },
+    "econ_value_inheritance": {
+        "en": "Inheritance - Birthright/Merit",
+        "de": "Erbschaft - Geburt/Verdienst"
+    },
+    "econ_value_labor": {
+        "en": "Labor - Unionized/Divided",
+        "de": "Arbeit - Gewerkschaftlich/Geteilt"
+    },
+    "eight_value_economic": {
+        "en": "Economic - Equality/Markets",
+        "de": "Wirtschaftlich - Gleichheit/Märkte"
+    },
+    "eight_value_diplomacy": {
+        "en": "Diplomatic - Nation/Globe",
+        "de": "Diplomatie - Volk/International"
+    },
+    "eight_value_civil": {
+        "en": "Civil - Liberty/Authority",
+        "de": "Zivil - Freiheit/Staatsmacht"
+    },
+    "eight_value_societal": {
+        "en": "Societal - Tradition/Progress",
+        "de": "Gesellschaftlich - Tradition/Fortschritt"
     }
 }

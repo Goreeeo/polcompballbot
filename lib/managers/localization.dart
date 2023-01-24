@@ -1,30 +1,41 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 class Localization {
   static final Localization _singleton = Localization._internal();
 
-  Map<String, Map<String, String>> localizations = {};
+  Map<String, dynamic> _localizations = {};
+  bool _initialized = false;
+  Function? _initCallback = null;
 
   factory Localization() {
     return _singleton;
   }
 
-  void init() {
-    File("lib/tables/localization.json").readAsString().then((String content) {
-      localizations = jsonDecode(content);
-    });
+  Future<void> init() async {
+    Completer completer = Completer(); 
+
+    String content = await File("lib/tables/localization.json").readAsString();
+    _localizations = jsonDecode(content);
+    _initialized = true;
+    completer.complete();
+    return completer.future;
   }
 
-  String? get(String key, String locale) {
-    if (!localizations.containsKey(key)) {
-      return null;
+  String get(String key, String? locale) {
+    if (!_initialized) {
+      return "Not Initialized";
     }
 
-    if (localizations[key]!.containsKey(locale)) {
-      return localizations[key]![locale];
+    if (!_localizations.containsKey(key)) {
+      return "Key not found.";
+    }
+
+    if ((_localizations[key]! as Map<String, dynamic>).containsKey(locale)) {
+      return _localizations[key]![locale];
     } else {
-      return localizations[key]!["en"];
+      return _localizations[key]!["en"];
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'package:polcompballbot/database/database.dart';
+import 'package:polcompballbot/managers/localization.dart';
 
 final addTestCommand = SlashCommandBuilder("add_test", "Adds a test to your profile.", [
   sapplyValuesCommand,
@@ -35,26 +36,12 @@ localizationsDescription: {
   String link = event.getArg("link").value;
 
   if (!link.toLowerCase().startsWith("https://sapplyvalues.github.io/results.html?") && !link.toLowerCase().startsWith("sapplyvalues.github.io/results.html?")) {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Ungültiger SapplyValues link."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("Invalid SapplyValues link."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("invalid_sapply", event.interaction.locale)));
     return;
   }
 
   await Database().setSapplyValues(event.interaction.userAuthor!.id.id, link);
-  switch (event.interaction.locale) {
-    case "de":
-      await event.respond(MessageBuilder.content("Erfolgreich SapplyValues Link hinzugefügt."));
-      break;
-    default:
-      await event.respond(MessageBuilder.content("Set SapplyValues link successfully!"));
-      break;
-  }
+  await event.respond(MessageBuilder.content(Localization().get("successful_sapply", event.interaction.locale)));
 });
 
 final dozenValuesCommand = CommandOptionBuilder(CommandOptionType.subCommand, "dozenvalues", "Set your DozenValues results.",
@@ -76,26 +63,12 @@ localizationsDescription: {
   String link = event.getArg("link").value;
 
   if (!link.toLowerCase().startsWith("https://quark88.github.io/dozenvalues/results.html") && !link.toLowerCase().startsWith("quark88.github.io/dozenvalues/results.html")) {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Ungültiger DozenValues link."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("Invalid DozenValues link."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("invalid_dozen", event.interaction.locale)));
     return;
   }
 
   await Database().setDozenValues(event.interaction.userAuthor!.id.id, link);
-  switch (event.interaction.locale) {
-    case "de":
-      await event.respond(MessageBuilder.content("Erfolgreich DozenValues link hinzugefügt!"));
-      break;
-    default:
-      await event.respond(MessageBuilder.content("Set DozenValues link successfully!"));
-      break;
-  }
+  await event.respond(MessageBuilder.content(Localization().get("successful_dozen", event.interaction.locale)));
 });
 
 final econValuesCommand = CommandOptionBuilder(CommandOptionType.subCommand, "econvalues", "Set your EconValues results.",
@@ -117,26 +90,12 @@ localizationsDescription: {
   String link = event.getArg("link").value;
 
   if (!link.toLowerCase().startsWith("https://rayz9989.github.io/econvaluesrestore/results.html?") && !link.toLowerCase().startsWith("rayz9989.github.io/econvaluesrestore/results.html?")) {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Ungültiger EconValues link."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("Invalid EconValues link."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("invalid_econ", event.interaction.locale)));
     return;
   }
 
   await Database().setEconValues(event.interaction.userAuthor!.id.id, link);
-  switch (event.interaction.locale) {
-    case "de":
-      await event.respond(MessageBuilder.content("Erfolgreich EconValues link hinzugefügt!"));
-      break;
-    default:
-      await event.respond(MessageBuilder.content("Set EconValues link successfully!"));
-      break;
-  }
+  await event.respond(MessageBuilder.content(Localization().get("successful_econ", event.interaction.locale)));
 });
 
 final eightValuesCommand = CommandOptionBuilder(CommandOptionType.subCommand, "eightvalues", "Set your 8Values results.",
@@ -158,26 +117,12 @@ localizationsDescription: {
   String link = event.getArg("link").value;
 
   if (!link.toLowerCase().startsWith("https://8values.github.io/results.html?") && !link.toLowerCase().startsWith("8values.github.io/results.html?")) {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Ungültiger 8Values link."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("Invalid 8Values link."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("invalid_eight_values", event.interaction.locale)));
     return;
   }
 
   await Database().setEightValues(event.interaction.userAuthor!.id.id, link);
-  switch (event.interaction.locale) {
-    case "de": 
-      await event.respond(MessageBuilder.content("Erfolgreich 8Values link hinzugefügt!"));
-      break;
-    default: 
-      await event.respond(MessageBuilder.content("Set 8Values link successfully!"));
-      break;
-  }
+  await event.respond(MessageBuilder.content(Localization().get("successful_eight_values", event.interaction.locale)));
 });
 
 final politicalCompass = CommandOptionBuilder(CommandOptionType.subCommand, "political_compass", "Set your political compass results.",
@@ -199,24 +144,10 @@ localizationsDescription: {
   String link = event.getArg("link").value;
 
   if (!link.toLowerCase().startsWith("https://www.politicalcompass.org/analysis2?") && !link.toLowerCase().startsWith("www.politicalcompass.org/analysis2?")) {
-    switch (event.interaction.locale) {
-      case "de": 
-        await event.respond(MessageBuilder.content("Ungültiger politischer Kompass link."));
-        break;
-      default: 
-        await event.respond(MessageBuilder.content("Invalid political compass link."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("invalid_political_compass", event.interaction.locale)));
     return;
   }
 
   await Database().setPoliticalCompass(event.interaction.userAuthor!.id.id, link);
-  switch (event.interaction.locale) {
-    case "de": 
-      await event.respond(MessageBuilder.content("Erfolgreich politischen Kompass link gesetzt."));
-      break;
-    default: 
-      await event.respond(MessageBuilder.content("Set political compass link successfully!"));
-      break;
-  }
+  await event.respond(MessageBuilder.content(Localization().get("successful_political_compass", event.interaction.locale)));
 });

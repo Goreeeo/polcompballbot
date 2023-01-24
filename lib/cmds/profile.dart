@@ -1,4 +1,5 @@
 import 'package:polcompballbot/database/database.dart';
+import 'package:polcompballbot/managers/localization.dart';
 import 'package:polcompballbot/managers/test_parser.dart';
 import 'package:tuple/tuple.dart';
 import "package:web_scraper/web_scraper.dart";
@@ -32,25 +33,11 @@ localizationsDescription:
   String userId = event.getArg("user").value;
   User? user = await Database().getById(int.parse(userId));
   if (user == null) {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Dieser Nutzer hat keinen assoziierten PolCompBall."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("This user does not have a PolCompBall associated with them."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("no_polcompball_associated", event.interaction.locale)));
     return;
   }
   if (user.ideology == null) {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Dieser Nutzer hat keinen assoziierten PolCompBall."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("This user does not have a PolCompBall associated with them."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("no_polcompball_associated", event.interaction.locale)));
     return;
   }
   Ideology ideology = await Database().getIdeologyById(user.ideology as int);
@@ -72,27 +59,11 @@ localizationsDescription:
     embed.thumbnailUrl = "https:${images[0]["attributes"]["src"]}";
     List<Map<String, dynamic>> titles = webScraper.getElement("span.mw-page-title-main", []);
     if (titles.isEmpty) return;
-    switch (event.interaction.locale) {
-      case "de":
-        embed.fields.add(EmbedFieldBuilder("Ideologie", titles[0]["title"]));
-        embed.fields.add(EmbedFieldBuilder("Kurzfassung", ideology.description));
-        embed.fields.add(EmbedFieldBuilder("Link", ideology.link));
-        break;
-      default:
-        embed.fields.add(EmbedFieldBuilder("Ideology", titles[0]["title"]));
-        embed.fields.add(EmbedFieldBuilder("Summary", ideology.description));
-        embed.fields.add(EmbedFieldBuilder("Link", ideology.link));
-        break;
-    }
+    embed.fields.add(EmbedFieldBuilder(Localization().get("profile_ideology", event.interaction.locale), titles[0]["title"]));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("profile_summary", event.interaction.locale), ideology.description));
+    embed.fields.add(EmbedFieldBuilder("Link", ideology.link));
   } else {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Es gab ein Problem dabei auf die PolCompBall Server zuzugreifen."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("There was an issue accessing the polcompball servers."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("polcompball_server_issue", event.interaction.locale)));
     return;
   }
 
@@ -114,24 +85,12 @@ localizationsDescription:
     embed.author = author;
 
     embed.title = "**DozenValues**";
-    switch (event.interaction.locale) {
-      case "de":
-        embed.fields.add(EmbedFieldBuilder("Besitz - Gleichheit/Eigentum", dv[0]));
-        embed.fields.add(EmbedFieldBuilder("Markt - Koordiniert/Handel", dv[1], true));
-        embed.fields.add(EmbedFieldBuilder("Staatsmacht - Herrschaft/Anarchie", dv[2], true));
-        embed.fields.add(EmbedFieldBuilder("Autonomie - Freiheit/Einschränkung", dv[3]));
-        embed.fields.add(EmbedFieldBuilder("Identität - Inklusivität/Vorherrschaft", dv[4], true));
-        embed.fields.add(EmbedFieldBuilder("Fortschritt - Erbschaft/Neuheit", dv[5], true));
-        break;
-      default:
-        embed.fields.add(EmbedFieldBuilder("Ownership - Equality/Property", dv[0]));
-        embed.fields.add(EmbedFieldBuilder("Market - Coordination/Commerce", dv[1], true));
-        embed.fields.add(EmbedFieldBuilder("Power - Dominion/Anarchy", dv[2], true));
-        embed.fields.add(EmbedFieldBuilder("Autonomy - Permission/Restriction", dv[3]));
-        embed.fields.add(EmbedFieldBuilder("Identity - Inclusivity/Supremacy", dv[4], true));
-        embed.fields.add(EmbedFieldBuilder("Progress - Heritage/Novelty", dv[5], true));
-        break;
-    }
+    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_ownership", event.interaction.locale), dv[0]));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_market", event.interaction.locale), dv[1], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_power", event.interaction.locale), dv[2], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_autonomy", event.interaction.locale), dv[3]));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_identity", event.interaction.locale), dv[4], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_progress", event.interaction.locale), dv[5], true));
 
     embed.fields.add(EmbedFieldBuilder("Link", user.dozenvalues));
     await event.sendFollowup(MessageBuilder.embed(embed));
@@ -149,18 +108,9 @@ localizationsDescription:
     embed.author = author;
 
     embed.title = "**SapplyValues**";
-    switch (event.interaction.locale) {
-      case "de":
-        embed.fields.add(EmbedFieldBuilder("Links/Rechts", sv[0]));
-        embed.fields.add(EmbedFieldBuilder("Autoritär/Libertär", sv[1], true));
-        embed.fields.add(EmbedFieldBuilder("Progressiv/Konservativ", sv[2], true));
-        break;
-      default:
-        embed.fields.add(EmbedFieldBuilder("Left/Right", sv[0]));
-        embed.fields.add(EmbedFieldBuilder("Authoritarian/Libertarian", sv[1], true));
-        embed.fields.add(EmbedFieldBuilder("Progressive/Conservative", sv[2], true));
-        break;
-    }
+    embed.fields.add(EmbedFieldBuilder(Localization().get("left_right", event.interaction.locale), sv[0]));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("auth_lib", event.interaction.locale), sv[1], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("prog_con", event.interaction.locale), sv[2], true));
 
     embed.fields.add(EmbedFieldBuilder("Link", user.sapplyvalues));
 
@@ -179,28 +129,14 @@ localizationsDescription:
     embed.author = author;
 
     embed.title = "**EconValues**";
-    switch (event.interaction.locale) {
-      case "de":
-        embed.fields.add(EmbedFieldBuilder("Anreiz - Gerechtigkeit/Konkurrenz", ev[0]));
-        embed.fields.add(EmbedFieldBuilder("Struktur - Horizontal/Hierarchie", ev[1], true));
-        embed.fields.add(EmbedFieldBuilder("Eingriff - Nachfrage/Regulation", ev[2], true));
-        embed.fields.add(EmbedFieldBuilder("Zentralisierung - Zentral/Lokal", ev[3]));
-        embed.fields.add(EmbedFieldBuilder("Technologie - Automatisierung/Angestellte", ev[4], true));
-        embed.fields.add(EmbedFieldBuilder("Land - Gemeinsam/Miete", ev[5], true));
-        embed.fields.add(EmbedFieldBuilder("Erbschaft - Geburt/Verdienst", ev[6]));
-        embed.fields.add(EmbedFieldBuilder("Arbeit - Gewerkschaftlich/Geteilt", ev[7], true));
-        break;
-      default:
-        embed.fields.add(EmbedFieldBuilder("Incentive - Equity/Competition", ev[0]));
-        embed.fields.add(EmbedFieldBuilder("Structure - Horizontal/Hierarchy", ev[1], true));
-        embed.fields.add(EmbedFieldBuilder("Intervention - Demand/Regulation", ev[2], true));
-        embed.fields.add(EmbedFieldBuilder("Centralisation - Central/Local", ev[3]));
-        embed.fields.add(EmbedFieldBuilder("Technology - Automation/Employment", ev[4], true));
-        embed.fields.add(EmbedFieldBuilder("Land - Commons/Rent", ev[5], true));
-        embed.fields.add(EmbedFieldBuilder("Inheritance - Birthright/Merit", ev[6]));
-        embed.fields.add(EmbedFieldBuilder("Labor - Unionized/Divided", ev[7], true));
-        break;
-    }
+    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_incentive", event.interaction.locale), ev[0]));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_structure", event.interaction.locale), ev[1], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_intervention", event.interaction.locale), ev[2], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_centralisation", event.interaction.locale), ev[3]));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_technology", event.interaction.locale), ev[4], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_land", event.interaction.locale), ev[5], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_inheritance", event.interaction.locale), ev[6]));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_labor", event.interaction.locale), ev[7], true));
     embed.fields.add(EmbedFieldBuilder("Link", user.econvalues));
 
     await event.sendFollowup(MessageBuilder.embed(embed));
@@ -218,20 +154,10 @@ localizationsDescription:
     embed.author = author;
 
     embed.title = "**EightValues**";
-    switch (event.interaction.locale) {
-      case "de":
-        embed.fields.add(EmbedFieldBuilder("Wirtschaftlich - Gleichheit/Märkte", ev[0]));
-        embed.fields.add(EmbedFieldBuilder("Diplomatie - Volk/International", ev[1], true));
-        embed.fields.add(EmbedFieldBuilder("Zivil - Freheit/Autorität", ev[2], true));
-        embed.fields.add(EmbedFieldBuilder("Sozial - Tradition/Fortschritt", ev[3], true));
-        break;
-      default:
-        embed.fields.add(EmbedFieldBuilder("Economic - Equality/Markets", ev[0]));
-        embed.fields.add(EmbedFieldBuilder("Diplomatic - Nation/Globe", ev[1], true));
-        embed.fields.add(EmbedFieldBuilder("Civil - Liberty/Authority", ev[2], true));
-        embed.fields.add(EmbedFieldBuilder("Societal - Tradition/Progress", ev[3], true));
-        break;
-    }
+    embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_economic", event.interaction.locale), ev[0]));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_diplomacy", event.interaction.locale), ev[1], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_civil", event.interaction.locale), ev[2], true));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_societal", event.interaction.locale), ev[3], true));
     embed.fields.add(EmbedFieldBuilder("Link", user.eightvalues));
 
     await event.sendFollowup(MessageBuilder.embed(embed));
@@ -250,16 +176,8 @@ localizationsDescription:
     embed.imageUrl = pc.item1;
 
     embed.title = "**Political Compass**";
-    switch (event.interaction.locale) {
-      case "de":
-        embed.fields.add(EmbedFieldBuilder("Links/Rechts", pc.item2[0]));
-        embed.fields.add(EmbedFieldBuilder("Autoritär/Libertär", pc.item2[1], true));
-        break;
-      default:
-        embed.fields.add(EmbedFieldBuilder("Left/Right", pc.item2[0]));
-        embed.fields.add(EmbedFieldBuilder("Auth/Lib", pc.item2[1], true));
-        break;
-    }
+    embed.fields.add(EmbedFieldBuilder(Localization().get("left_right", event.interaction.locale), pc.item2[0]));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("auth_lib", event.interaction.locale), pc.item2[1], true));
 
     embed.fields.add(EmbedFieldBuilder("Link", user.politicalcompass));
 

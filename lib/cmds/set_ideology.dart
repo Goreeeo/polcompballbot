@@ -2,6 +2,7 @@ import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'package:polcompballbot/database/database.dart';
 import 'package:polcompballbot/database/string_to_ideology.dart';
+import 'package:polcompballbot/managers/localization.dart';
 
 final setIdeologyCommand = SlashCommandBuilder("set_ideology", "Sets your ideology.", 
 [
@@ -18,14 +19,7 @@ localizationsDescription:
   int? ideology = StringIdeologyConverter().getIdeology(event.getArg("ideology").value);
 
   if (ideology is! int) {
-    switch (event.interaction.locale) {
-      case "de":
-        await event.respond(MessageBuilder.content("Ideologie existiert nicht in der Datenbank. Überprüfe deine Rechtschreibung oder erstelle eine neue mit dem /erstelle_ideologie command."));
-        break;
-      default:
-        await event.respond(MessageBuilder.content("Ideology doesn't exist in database. Check your spelling or create it by using the /create_ideology command."));
-        break;
-    }
+    await event.respond(MessageBuilder.content(Localization().get("ideology_not_in_database", event.interaction.locale)));
     return;
   }
 
