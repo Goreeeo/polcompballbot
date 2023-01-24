@@ -1,0 +1,16 @@
+import 'ideology_category.dart';
+
+CREATE TABLE users
+(
+    id INT NOT NULL PRIMARY KEY,
+    ideology INT REFERENCES ideologies(id),
+    region TEXT
+) AS User;
+
+CREATE TABLE ideologies
+(
+    id INT NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    link TEXT NOT NULL
+) AS Ideology;
