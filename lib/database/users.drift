@@ -4,7 +4,12 @@ CREATE TABLE users
 (
     id INT NOT NULL PRIMARY KEY,
     ideology INT REFERENCES ideologies(id),
-    region TEXT
+    region TEXT,
+    politicalcompass TEXT,
+    sapplyvalues TEXT,
+    dozenvalues TEXT,
+    econvalues TEXT,
+    eightvalues TEXT
 ) AS User;
 
 CREATE TABLE ideologies

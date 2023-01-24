@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'package:polcompballbot/database/database.dart';
@@ -27,10 +25,24 @@ localizationsDescription:
   String region = event.getArg("region").value;
 
   if (Countries().get(region) == null) {
-    await event.respond(MessageBuilder.content("Could not find region code."));
+    switch (event.interaction.locale) {
+      case "de":
+        await event.respond(MessageBuilder.content("Regional-code wurde nicht erkannt."));
+        break;
+      default:
+        await event.respond(MessageBuilder.content("Could not find region code."));
+        break;
+    }
     return;
   }
 
   await Database().setRegion(event.interaction.userAuthor!.id.id, region);
-  await event.respond(MessageBuilder.content("Region set to ${Countries().get(region)!.name}."));
+  switch (event.interaction.locale) {
+    case "de":
+      await event.respond(MessageBuilder.content("Region zu ${Countries().get(region)!.name} geändert."));
+      break;
+    default:
+      await event.respond(MessageBuilder.content("Region set to ${Countries().get(region)!.name}."));
+      break;
+  }
 });

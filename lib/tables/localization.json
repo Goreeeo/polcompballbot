@@ -1,0 +1,10 @@
+{
+    "invalid_sapply": {
+        "en": "Invalid SapplyValues link.",
+        "de": "Ungültiger SapplyValues Link."
+    },
+    "invalid_eight_values": {
+        "en": "Invalid 8Values link.",
+        "de": "Ungültiger 8Values Link."
+    }
+}

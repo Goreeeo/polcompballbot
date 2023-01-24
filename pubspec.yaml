@@ -20,3 +20,4 @@ dependencies:
   enum_flag: ^1.0.1
   http: ^0.13.5
   web_scraper: ^0.1.4
+  tuple: ^2.0.1

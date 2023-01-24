@@ -40,6 +40,36 @@ class Database extends _$Database {
     return into(users).insertOnConflictUpdate(user);
   }
 
+  Future setDozenValues(int userid, String link) {
+    User user = User(id: userid, dozenvalues: link);
+
+    return into(users).insertOnConflictUpdate(user);
+  }
+
+  Future setEconValues(int userid, String link) {
+    User user = User(id: userid, econvalues: link);
+
+    return into(users).insertOnConflictUpdate(user);
+  }
+
+  Future setEightValues(int userid, String link) {
+    User user = User(id: userid, eightvalues: link);
+
+    return into(users).insertOnConflictUpdate(user);
+  }
+
+  Future setSapplyValues(int userid, String sapplyLink) {
+    User user = User(id: userid, sapplyvalues: sapplyLink);
+
+    return into(users).insertOnConflictUpdate(user);
+  }
+
+  Future setPoliticalCompass(int userid, String link) {
+    User user = User(id: userid, politicalcompass: link);
+
+    return into(users).insertOnConflictUpdate(user);
+  }
+
   Future setIdeology(int userId, int ideology) {
     User user = User(id: userId, ideology: ideology);
 

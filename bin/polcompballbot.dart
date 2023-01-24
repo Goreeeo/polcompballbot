@@ -4,10 +4,10 @@ import 'dart:io';
 
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
-import 'package:path/path.dart';
-import 'package:polcompballbot/Environment.dart';
+import "package:polcompballbot/managers/environment.dart";
 import 'package:polcompballbot/cmds/create_ideology.dart';
 import 'package:polcompballbot/cmds/profile.dart';
+import 'package:polcompballbot/cmds/add_test.dart';
 import 'package:polcompballbot/cmds/set_ideology.dart';
 import 'package:polcompballbot/cmds/set_region.dart';
 import 'package:polcompballbot/database/string_to_ideology.dart';
@@ -35,6 +35,7 @@ void main() {
       ..registerSlashCommand(createIdeologyCommand)
       ..registerSlashCommand(profileCommand)
       ..registerSlashCommand(setRegionCommand)
+      ..registerSlashCommand(addTestCommand)
       ..syncOnReady();
   });
 }

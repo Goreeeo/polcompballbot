@@ -278,8 +278,52 @@ class Users extends Table with TableInfo<Users, User> {
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
+  static const VerificationMeta _politicalcompassMeta =
+      const VerificationMeta('politicalcompass');
+  late final GeneratedColumn<String> politicalcompass = GeneratedColumn<String>(
+      'politicalcompass', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _sapplyvaluesMeta =
+      const VerificationMeta('sapplyvalues');
+  late final GeneratedColumn<String> sapplyvalues = GeneratedColumn<String>(
+      'sapplyvalues', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _dozenvaluesMeta =
+      const VerificationMeta('dozenvalues');
+  late final GeneratedColumn<String> dozenvalues = GeneratedColumn<String>(
+      'dozenvalues', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _econvaluesMeta =
+      const VerificationMeta('econvalues');
+  late final GeneratedColumn<String> econvalues = GeneratedColumn<String>(
+      'econvalues', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
+  static const VerificationMeta _eightvaluesMeta =
+      const VerificationMeta('eightvalues');
+  late final GeneratedColumn<String> eightvalues = GeneratedColumn<String>(
+      'eightvalues', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
   @override
-  List<GeneratedColumn> get $columns => [id, ideology, region];
+  List<GeneratedColumn> get $columns => [
+        id,
+        ideology,
+        region,
+        politicalcompass,
+        sapplyvalues,
+        dozenvalues,
+        econvalues,
+        eightvalues
+      ];
   @override
   String get aliasedName => _alias ?? 'users';
   @override
@@ -300,6 +344,36 @@ class Users extends Table with TableInfo<Users, User> {
       context.handle(_regionMeta,
           region.isAcceptableOrUnknown(data['region']!, _regionMeta));
     }
+    if (data.containsKey('politicalcompass')) {
+      context.handle(
+          _politicalcompassMeta,
+          politicalcompass.isAcceptableOrUnknown(
+              data['politicalcompass']!, _politicalcompassMeta));
+    }
+    if (data.containsKey('sapplyvalues')) {
+      context.handle(
+          _sapplyvaluesMeta,
+          sapplyvalues.isAcceptableOrUnknown(
+              data['sapplyvalues']!, _sapplyvaluesMeta));
+    }
+    if (data.containsKey('dozenvalues')) {
+      context.handle(
+          _dozenvaluesMeta,
+          dozenvalues.isAcceptableOrUnknown(
+              data['dozenvalues']!, _dozenvaluesMeta));
+    }
+    if (data.containsKey('econvalues')) {
+      context.handle(
+          _econvaluesMeta,
+          econvalues.isAcceptableOrUnknown(
+              data['econvalues']!, _econvaluesMeta));
+    }
+    if (data.containsKey('eightvalues')) {
+      context.handle(
+          _eightvaluesMeta,
+          eightvalues.isAcceptableOrUnknown(
+              data['eightvalues']!, _eightvaluesMeta));
+    }
     return context;
   }
 
@@ -315,6 +389,16 @@ class Users extends Table with TableInfo<Users, User> {
           .read(DriftSqlType.int, data['${effectivePrefix}ideology']),
       region: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}region']),
+      politicalcompass: attachedDatabase.typeMapping.read(
+          DriftSqlType.string, data['${effectivePrefix}politicalcompass']),
+      sapplyvalues: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}sapplyvalues']),
+      dozenvalues: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}dozenvalues']),
+      econvalues: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}econvalues']),
+      eightvalues: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}eightvalues']),
     );
   }
 
@@ -331,7 +415,20 @@ class User extends DataClass implements Insertable<User> {
   final int id;
   final int? ideology;
   final String? region;
-  const User({required this.id, this.ideology, this.region});
+  final String? politicalcompass;
+  final String? sapplyvalues;
+  final String? dozenvalues;
+  final String? econvalues;
+  final String? eightvalues;
+  const User(
+      {required this.id,
+      this.ideology,
+      this.region,
+      this.politicalcompass,
+      this.sapplyvalues,
+      this.dozenvalues,
+      this.econvalues,
+      this.eightvalues});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -341,6 +438,21 @@ class User extends DataClass implements Insertable<User> {
     }
     if (!nullToAbsent || region != null) {
       map['region'] = Variable<String>(region);
+    }
+    if (!nullToAbsent || politicalcompass != null) {
+      map['politicalcompass'] = Variable<String>(politicalcompass);
+    }
+    if (!nullToAbsent || sapplyvalues != null) {
+      map['sapplyvalues'] = Variable<String>(sapplyvalues);
+    }
+    if (!nullToAbsent || dozenvalues != null) {
+      map['dozenvalues'] = Variable<String>(dozenvalues);
+    }
+    if (!nullToAbsent || econvalues != null) {
+      map['econvalues'] = Variable<String>(econvalues);
+    }
+    if (!nullToAbsent || eightvalues != null) {
+      map['eightvalues'] = Variable<String>(eightvalues);
     }
     return map;
   }
@@ -353,6 +465,21 @@ class User extends DataClass implements Insertable<User> {
           : Value(ideology),
       region:
           region == null && nullToAbsent ? const Value.absent() : Value(region),
+      politicalcompass: politicalcompass == null && nullToAbsent
+          ? const Value.absent()
+          : Value(politicalcompass),
+      sapplyvalues: sapplyvalues == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sapplyvalues),
+      dozenvalues: dozenvalues == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dozenvalues),
+      econvalues: econvalues == null && nullToAbsent
+          ? const Value.absent()
+          : Value(econvalues),
+      eightvalues: eightvalues == null && nullToAbsent
+          ? const Value.absent()
+          : Value(eightvalues),
     );
   }
 
@@ -363,6 +490,11 @@ class User extends DataClass implements Insertable<User> {
       id: serializer.fromJson<int>(json['id']),
       ideology: serializer.fromJson<int?>(json['ideology']),
       region: serializer.fromJson<String?>(json['region']),
+      politicalcompass: serializer.fromJson<String?>(json['politicalcompass']),
+      sapplyvalues: serializer.fromJson<String?>(json['sapplyvalues']),
+      dozenvalues: serializer.fromJson<String?>(json['dozenvalues']),
+      econvalues: serializer.fromJson<String?>(json['econvalues']),
+      eightvalues: serializer.fromJson<String?>(json['eightvalues']),
     );
   }
   @override
@@ -372,71 +504,137 @@ class User extends DataClass implements Insertable<User> {
       'id': serializer.toJson<int>(id),
       'ideology': serializer.toJson<int?>(ideology),
       'region': serializer.toJson<String?>(region),
+      'politicalcompass': serializer.toJson<String?>(politicalcompass),
+      'sapplyvalues': serializer.toJson<String?>(sapplyvalues),
+      'dozenvalues': serializer.toJson<String?>(dozenvalues),
+      'econvalues': serializer.toJson<String?>(econvalues),
+      'eightvalues': serializer.toJson<String?>(eightvalues),
     };
   }
 
   User copyWith(
           {int? id,
           Value<int?> ideology = const Value.absent(),
-          Value<String?> region = const Value.absent()}) =>
+          Value<String?> region = const Value.absent(),
+          Value<String?> politicalcompass = const Value.absent(),
+          Value<String?> sapplyvalues = const Value.absent(),
+          Value<String?> dozenvalues = const Value.absent(),
+          Value<String?> econvalues = const Value.absent(),
+          Value<String?> eightvalues = const Value.absent()}) =>
       User(
         id: id ?? this.id,
         ideology: ideology.present ? ideology.value : this.ideology,
         region: region.present ? region.value : this.region,
+        politicalcompass: politicalcompass.present
+            ? politicalcompass.value
+            : this.politicalcompass,
+        sapplyvalues:
+            sapplyvalues.present ? sapplyvalues.value : this.sapplyvalues,
+        dozenvalues: dozenvalues.present ? dozenvalues.value : this.dozenvalues,
+        econvalues: econvalues.present ? econvalues.value : this.econvalues,
+        eightvalues: eightvalues.present ? eightvalues.value : this.eightvalues,
       );
   @override
   String toString() {
     return (StringBuffer('User(')
           ..write('id: $id, ')
           ..write('ideology: $ideology, ')
-          ..write('region: $region')
+          ..write('region: $region, ')
+          ..write('politicalcompass: $politicalcompass, ')
+          ..write('sapplyvalues: $sapplyvalues, ')
+          ..write('dozenvalues: $dozenvalues, ')
+          ..write('econvalues: $econvalues, ')
+          ..write('eightvalues: $eightvalues')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, ideology, region);
+  int get hashCode => Object.hash(id, ideology, region, politicalcompass,
+      sapplyvalues, dozenvalues, econvalues, eightvalues);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is User &&
           other.id == this.id &&
           other.ideology == this.ideology &&
-          other.region == this.region);
+          other.region == this.region &&
+          other.politicalcompass == this.politicalcompass &&
+          other.sapplyvalues == this.sapplyvalues &&
+          other.dozenvalues == this.dozenvalues &&
+          other.econvalues == this.econvalues &&
+          other.eightvalues == this.eightvalues);
 }
 
 class UsersCompanion extends UpdateCompanion<User> {
   final Value<int> id;
   final Value<int?> ideology;
   final Value<String?> region;
+  final Value<String?> politicalcompass;
+  final Value<String?> sapplyvalues;
+  final Value<String?> dozenvalues;
+  final Value<String?> econvalues;
+  final Value<String?> eightvalues;
   const UsersCompanion({
     this.id = const Value.absent(),
     this.ideology = const Value.absent(),
     this.region = const Value.absent(),
+    this.politicalcompass = const Value.absent(),
+    this.sapplyvalues = const Value.absent(),
+    this.dozenvalues = const Value.absent(),
+    this.econvalues = const Value.absent(),
+    this.eightvalues = const Value.absent(),
   });
   UsersCompanion.insert({
     this.id = const Value.absent(),
     this.ideology = const Value.absent(),
     this.region = const Value.absent(),
+    this.politicalcompass = const Value.absent(),
+    this.sapplyvalues = const Value.absent(),
+    this.dozenvalues = const Value.absent(),
+    this.econvalues = const Value.absent(),
+    this.eightvalues = const Value.absent(),
   });
   static Insertable<User> custom({
     Expression<int>? id,
     Expression<int>? ideology,
     Expression<String>? region,
+    Expression<String>? politicalcompass,
+    Expression<String>? sapplyvalues,
+    Expression<String>? dozenvalues,
+    Expression<String>? econvalues,
+    Expression<String>? eightvalues,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (ideology != null) 'ideology': ideology,
       if (region != null) 'region': region,
+      if (politicalcompass != null) 'politicalcompass': politicalcompass,
+      if (sapplyvalues != null) 'sapplyvalues': sapplyvalues,
+      if (dozenvalues != null) 'dozenvalues': dozenvalues,
+      if (econvalues != null) 'econvalues': econvalues,
+      if (eightvalues != null) 'eightvalues': eightvalues,
     });
   }
 
   UsersCompanion copyWith(
-      {Value<int>? id, Value<int?>? ideology, Value<String?>? region}) {
+      {Value<int>? id,
+      Value<int?>? ideology,
+      Value<String?>? region,
+      Value<String?>? politicalcompass,
+      Value<String?>? sapplyvalues,
+      Value<String?>? dozenvalues,
+      Value<String?>? econvalues,
+      Value<String?>? eightvalues}) {
     return UsersCompanion(
       id: id ?? this.id,
       ideology: ideology ?? this.ideology,
       region: region ?? this.region,
+      politicalcompass: politicalcompass ?? this.politicalcompass,
+      sapplyvalues: sapplyvalues ?? this.sapplyvalues,
+      dozenvalues: dozenvalues ?? this.dozenvalues,
+      econvalues: econvalues ?? this.econvalues,
+      eightvalues: eightvalues ?? this.eightvalues,
     );
   }
 
@@ -452,6 +650,21 @@ class UsersCompanion extends UpdateCompanion<User> {
     if (region.present) {
       map['region'] = Variable<String>(region.value);
     }
+    if (politicalcompass.present) {
+      map['politicalcompass'] = Variable<String>(politicalcompass.value);
+    }
+    if (sapplyvalues.present) {
+      map['sapplyvalues'] = Variable<String>(sapplyvalues.value);
+    }
+    if (dozenvalues.present) {
+      map['dozenvalues'] = Variable<String>(dozenvalues.value);
+    }
+    if (econvalues.present) {
+      map['econvalues'] = Variable<String>(econvalues.value);
+    }
+    if (eightvalues.present) {
+      map['eightvalues'] = Variable<String>(eightvalues.value);
+    }
     return map;
   }
 
@@ -460,7 +673,12 @@ class UsersCompanion extends UpdateCompanion<User> {
     return (StringBuffer('UsersCompanion(')
           ..write('id: $id, ')
           ..write('ideology: $ideology, ')
-          ..write('region: $region')
+          ..write('region: $region, ')
+          ..write('politicalcompass: $politicalcompass, ')
+          ..write('sapplyvalues: $sapplyvalues, ')
+          ..write('dozenvalues: $dozenvalues, ')
+          ..write('econvalues: $econvalues, ')
+          ..write('eightvalues: $eightvalues')
           ..write(')'))
         .toString();
   }
