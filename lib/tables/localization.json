@@ -76,7 +76,7 @@
         "de": "Ideologie"
     },
     "profile_summary": {
-        "en": "Summary",
+        "en": "Caption",
         "de": "Kurzfassung"
     },
     "dozen_value_ownership": {
@@ -210,5 +210,9 @@
     "cultural_value_philosophy": {
         "en": "Philosophy - Essentialism/Constructivism",
         "de": "Philosophie - Essentialismus/Konstruktivismus"
+    },
+    "no_dm_support": {
+        "en": "This command can't be executed in DMs, please perform it in a server.",
+        "de": "Dieser command kann nicht innerhalb einer DM ausgeführt werden, bitte führe ihn in einem Server aus."
     }
 }

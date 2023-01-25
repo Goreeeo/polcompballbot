@@ -7,7 +7,6 @@ class Localization {
 
   Map<String, dynamic> _localizations = {};
   bool _initialized = false;
-  Function? _initCallback = null;
 
   factory Localization() {
     return _singleton;

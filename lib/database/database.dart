@@ -8,7 +8,7 @@ part "database.g.dart";
 
 @DriftDatabase(
   include: {'users.drift'},
-  tables: [Users, Ideologies]
+  tables: [Users]
 )
 
 class Database extends _$Database {
@@ -18,20 +18,9 @@ class Database extends _$Database {
   int get schemaVersion => 1;
 
   Future<List<User>> get allUserEntries => select(users).get();
-  Future<List<Ideology>> get allIdeologyEntries => select(ideologies).get();
-
-  Future<Ideology> getIdeologyById(int ideology) {
-    return (select(ideologies)..where((t) => t.id.equals(ideology))).getSingle();
-  }
 
   Future<User?> getById(int id) {
     return (select(users)..where((t) => t.id.equals(id))).getSingleOrNull();
-  }
-
-  Future<Ideology> createIdeology(String ideologyName, String summary, String link) {
-    return into(ideologies).insertReturning(
-      IdeologiesCompanion.insert(name: ideologyName.toLowerCase(), description: summary, link: link)
-    );
   }
 
   Future setRegion(int userid, String region) {
@@ -76,7 +65,7 @@ class Database extends _$Database {
     return into(users).insertOnConflictUpdate(user);
   }
 
-  Future setIdeology(int userId, int ideology) {
+  Future setIdeology(int userId, String ideology) {
     User user = User(id: userId, ideology: ideology);
 
     return into(users).insertOnConflictUpdate(user);

@@ -1,12 +1,16 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import 'package:polcompballbot/database/database.dart';
-import 'package:polcompballbot/database/string_to_ideology.dart';
-import 'package:polcompballbot/managers/localization.dart';
 
 final setIdeologyCommand = SlashCommandBuilder("set_ideology", "Sets your ideology.", 
 [
-  CommandOptionBuilder(CommandOptionType.string, "ideology", "The ideology you wish to have.", required: true)
+  CommandOptionBuilder(CommandOptionType.string, "link", "The PCB or PCBA link of the ideology you wish to have.", required: true,
+  localizationsName: {
+    Locale.german: "link"
+  },
+  localizationsDescription: {
+    Locale.german: "Der PCB oder PCBA link von der Ideologie die du haben möchtest."
+  })
 ],
 localizationsName:
 {
@@ -14,14 +18,9 @@ localizationsName:
 },
 localizationsDescription:
 {
-  Locale.german: "Die Ideologie die du wählen möchtest."
+  Locale.german: "Ändert deine Ideologie."
 })..registerHandler((event) async {
-  int? ideology = StringIdeologyConverter().getIdeology(event.getArg("ideology").value);
-
-  if (ideology is! int) {
-    await event.respond(MessageBuilder.content(Localization().get("ideology_not_in_database", event.interaction.locale)));
-    return;
-  }
+  String ideology = event.getArg("ideology").value;
 
   await Database().setIdeology(event.interaction.userAuthor!.id.id, ideology);
   switch (event.interaction.locale) {

@@ -5,12 +5,10 @@ import 'dart:io';
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
 import "package:polcompballbot/managers/environment.dart";
-import 'package:polcompballbot/cmds/create_ideology.dart';
 import 'package:polcompballbot/cmds/profile.dart';
 import 'package:polcompballbot/cmds/add_test.dart';
 import 'package:polcompballbot/cmds/set_ideology.dart';
 import 'package:polcompballbot/cmds/set_region.dart';
-import 'package:polcompballbot/database/string_to_ideology.dart';
 import 'package:polcompballbot/managers/localization.dart';
 import 'package:polcompballbot/objects/countries.dart';
 
@@ -23,7 +21,6 @@ void main() {
 
   Localization().init().then((value) {
     File("lib/tables/countries.json").readAsString().then((String content) {
-      StringIdeologyConverter().init();
       Countries().init(jsonDecode(content));
 
       final bot = NyxxFactory.createNyxxWebsocket(Environment().get("BOT_TOKEN") as String, GatewayIntents.allUnprivileged)
@@ -34,7 +31,6 @@ void main() {
 
       IInteractions.create(WebsocketInteractionBackend(bot))
         ..registerSlashCommand(setIdeologyCommand)
-        ..registerSlashCommand(createIdeologyCommand)
         ..registerSlashCommand(profileCommand)
         ..registerSlashCommand(setRegionCommand)
         ..registerSlashCommand(addTestCommand)

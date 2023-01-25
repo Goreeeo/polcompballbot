@@ -28,6 +28,11 @@ localizationsDescription:
 {
   Locale.german: "Zeigt das Profil von jemandem an."
 })..registerHandler((event) async {
+  if (event.interaction.guild == null) {
+    await event.respond(MessageBuilder.content(Localization().get("no_dm_support", event.interaction.locale)));
+    return;
+  }
+
   await event.acknowledge();
 
   String userId = event.getArg("user").value;
@@ -40,7 +45,6 @@ localizationsDescription:
     await event.respond(MessageBuilder.content(Localization().get("no_polcompball_associated", event.interaction.locale)));
     return;
   }
-  Ideology ideology = await Database().getIdeologyById(user.ideology as int);
 
   IGuild guild = await event.interaction.guild!.getOrDownload();
   IMember targetMember = await guild.fetchMember(Snowflake.value(int.parse(userId)));
@@ -53,15 +57,17 @@ localizationsDescription:
   embed.author = author;
   
   final webScraper = WebScraper();
-  if (await webScraper.loadFullURL(ideology.link)) {
+  if (await webScraper.loadFullURL(user.ideology as String)) {
     List<Map<String, dynamic>> images = webScraper.getElement("img.pi-image-thumbnail", ["src"]);
     if (images.isEmpty) return;
     embed.thumbnailUrl = "https:${images[0]["attributes"]["src"]}";
     List<Map<String, dynamic>> titles = webScraper.getElement("span.mw-page-title-main", []);
     if (titles.isEmpty) return;
+    List<String> captions = webScraper.getElementTitle("figcaption.pi-caption");
+    if (captions.isEmpty) return;
     embed.fields.add(EmbedFieldBuilder(Localization().get("profile_ideology", event.interaction.locale), titles[0]["title"]));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("profile_summary", event.interaction.locale), ideology.description));
-    embed.fields.add(EmbedFieldBuilder("Link", ideology.link));
+    embed.fields.add(EmbedFieldBuilder(Localization().get("profile_summary", event.interaction.locale), captions[0]));
+    embed.fields.add(EmbedFieldBuilder("Link", user.ideology));
   } else {
     await event.respond(MessageBuilder.content(Localization().get("polcompball_server_issue", event.interaction.locale)));
     return;
