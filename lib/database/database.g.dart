@@ -313,6 +313,13 @@ class Users extends Table with TableInfo<Users, User> {
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
+  static const VerificationMeta _culturalvaluesMeta =
+      const VerificationMeta('culturalvalues');
+  late final GeneratedColumn<String> culturalvalues = GeneratedColumn<String>(
+      'culturalvalues', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      $customConstraints: '');
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -322,7 +329,8 @@ class Users extends Table with TableInfo<Users, User> {
         sapplyvalues,
         dozenvalues,
         econvalues,
-        eightvalues
+        eightvalues,
+        culturalvalues
       ];
   @override
   String get aliasedName => _alias ?? 'users';
@@ -374,6 +382,12 @@ class Users extends Table with TableInfo<Users, User> {
           eightvalues.isAcceptableOrUnknown(
               data['eightvalues']!, _eightvaluesMeta));
     }
+    if (data.containsKey('culturalvalues')) {
+      context.handle(
+          _culturalvaluesMeta,
+          culturalvalues.isAcceptableOrUnknown(
+              data['culturalvalues']!, _culturalvaluesMeta));
+    }
     return context;
   }
 
@@ -399,6 +413,8 @@ class Users extends Table with TableInfo<Users, User> {
           .read(DriftSqlType.string, data['${effectivePrefix}econvalues']),
       eightvalues: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}eightvalues']),
+      culturalvalues: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}culturalvalues']),
     );
   }
 
@@ -420,6 +436,7 @@ class User extends DataClass implements Insertable<User> {
   final String? dozenvalues;
   final String? econvalues;
   final String? eightvalues;
+  final String? culturalvalues;
   const User(
       {required this.id,
       this.ideology,
@@ -428,7 +445,8 @@ class User extends DataClass implements Insertable<User> {
       this.sapplyvalues,
       this.dozenvalues,
       this.econvalues,
-      this.eightvalues});
+      this.eightvalues,
+      this.culturalvalues});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -453,6 +471,9 @@ class User extends DataClass implements Insertable<User> {
     }
     if (!nullToAbsent || eightvalues != null) {
       map['eightvalues'] = Variable<String>(eightvalues);
+    }
+    if (!nullToAbsent || culturalvalues != null) {
+      map['culturalvalues'] = Variable<String>(culturalvalues);
     }
     return map;
   }
@@ -480,6 +501,9 @@ class User extends DataClass implements Insertable<User> {
       eightvalues: eightvalues == null && nullToAbsent
           ? const Value.absent()
           : Value(eightvalues),
+      culturalvalues: culturalvalues == null && nullToAbsent
+          ? const Value.absent()
+          : Value(culturalvalues),
     );
   }
 
@@ -495,6 +519,7 @@ class User extends DataClass implements Insertable<User> {
       dozenvalues: serializer.fromJson<String?>(json['dozenvalues']),
       econvalues: serializer.fromJson<String?>(json['econvalues']),
       eightvalues: serializer.fromJson<String?>(json['eightvalues']),
+      culturalvalues: serializer.fromJson<String?>(json['culturalvalues']),
     );
   }
   @override
@@ -509,6 +534,7 @@ class User extends DataClass implements Insertable<User> {
       'dozenvalues': serializer.toJson<String?>(dozenvalues),
       'econvalues': serializer.toJson<String?>(econvalues),
       'eightvalues': serializer.toJson<String?>(eightvalues),
+      'culturalvalues': serializer.toJson<String?>(culturalvalues),
     };
   }
 
@@ -520,7 +546,8 @@ class User extends DataClass implements Insertable<User> {
           Value<String?> sapplyvalues = const Value.absent(),
           Value<String?> dozenvalues = const Value.absent(),
           Value<String?> econvalues = const Value.absent(),
-          Value<String?> eightvalues = const Value.absent()}) =>
+          Value<String?> eightvalues = const Value.absent(),
+          Value<String?> culturalvalues = const Value.absent()}) =>
       User(
         id: id ?? this.id,
         ideology: ideology.present ? ideology.value : this.ideology,
@@ -533,6 +560,8 @@ class User extends DataClass implements Insertable<User> {
         dozenvalues: dozenvalues.present ? dozenvalues.value : this.dozenvalues,
         econvalues: econvalues.present ? econvalues.value : this.econvalues,
         eightvalues: eightvalues.present ? eightvalues.value : this.eightvalues,
+        culturalvalues:
+            culturalvalues.present ? culturalvalues.value : this.culturalvalues,
       );
   @override
   String toString() {
@@ -544,14 +573,15 @@ class User extends DataClass implements Insertable<User> {
           ..write('sapplyvalues: $sapplyvalues, ')
           ..write('dozenvalues: $dozenvalues, ')
           ..write('econvalues: $econvalues, ')
-          ..write('eightvalues: $eightvalues')
+          ..write('eightvalues: $eightvalues, ')
+          ..write('culturalvalues: $culturalvalues')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(id, ideology, region, politicalcompass,
-      sapplyvalues, dozenvalues, econvalues, eightvalues);
+      sapplyvalues, dozenvalues, econvalues, eightvalues, culturalvalues);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -563,7 +593,8 @@ class User extends DataClass implements Insertable<User> {
           other.sapplyvalues == this.sapplyvalues &&
           other.dozenvalues == this.dozenvalues &&
           other.econvalues == this.econvalues &&
-          other.eightvalues == this.eightvalues);
+          other.eightvalues == this.eightvalues &&
+          other.culturalvalues == this.culturalvalues);
 }
 
 class UsersCompanion extends UpdateCompanion<User> {
@@ -575,6 +606,7 @@ class UsersCompanion extends UpdateCompanion<User> {
   final Value<String?> dozenvalues;
   final Value<String?> econvalues;
   final Value<String?> eightvalues;
+  final Value<String?> culturalvalues;
   const UsersCompanion({
     this.id = const Value.absent(),
     this.ideology = const Value.absent(),
@@ -584,6 +616,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.dozenvalues = const Value.absent(),
     this.econvalues = const Value.absent(),
     this.eightvalues = const Value.absent(),
+    this.culturalvalues = const Value.absent(),
   });
   UsersCompanion.insert({
     this.id = const Value.absent(),
@@ -594,6 +627,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     this.dozenvalues = const Value.absent(),
     this.econvalues = const Value.absent(),
     this.eightvalues = const Value.absent(),
+    this.culturalvalues = const Value.absent(),
   });
   static Insertable<User> custom({
     Expression<int>? id,
@@ -604,6 +638,7 @@ class UsersCompanion extends UpdateCompanion<User> {
     Expression<String>? dozenvalues,
     Expression<String>? econvalues,
     Expression<String>? eightvalues,
+    Expression<String>? culturalvalues,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -614,6 +649,7 @@ class UsersCompanion extends UpdateCompanion<User> {
       if (dozenvalues != null) 'dozenvalues': dozenvalues,
       if (econvalues != null) 'econvalues': econvalues,
       if (eightvalues != null) 'eightvalues': eightvalues,
+      if (culturalvalues != null) 'culturalvalues': culturalvalues,
     });
   }
 
@@ -625,7 +661,8 @@ class UsersCompanion extends UpdateCompanion<User> {
       Value<String?>? sapplyvalues,
       Value<String?>? dozenvalues,
       Value<String?>? econvalues,
-      Value<String?>? eightvalues}) {
+      Value<String?>? eightvalues,
+      Value<String?>? culturalvalues}) {
     return UsersCompanion(
       id: id ?? this.id,
       ideology: ideology ?? this.ideology,
@@ -635,6 +672,7 @@ class UsersCompanion extends UpdateCompanion<User> {
       dozenvalues: dozenvalues ?? this.dozenvalues,
       econvalues: econvalues ?? this.econvalues,
       eightvalues: eightvalues ?? this.eightvalues,
+      culturalvalues: culturalvalues ?? this.culturalvalues,
     );
   }
 
@@ -665,6 +703,9 @@ class UsersCompanion extends UpdateCompanion<User> {
     if (eightvalues.present) {
       map['eightvalues'] = Variable<String>(eightvalues.value);
     }
+    if (culturalvalues.present) {
+      map['culturalvalues'] = Variable<String>(culturalvalues.value);
+    }
     return map;
   }
 
@@ -678,7 +719,8 @@ class UsersCompanion extends UpdateCompanion<User> {
           ..write('sapplyvalues: $sapplyvalues, ')
           ..write('dozenvalues: $dozenvalues, ')
           ..write('econvalues: $econvalues, ')
-          ..write('eightvalues: $eightvalues')
+          ..write('eightvalues: $eightvalues, ')
+          ..write('culturalvalues: $culturalvalues')
           ..write(')'))
         .toString();
   }

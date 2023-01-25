@@ -31,6 +31,14 @@
         "en": "Set 8Values link successfully.",
         "de": "Erfolgreich 8Values Link hinzugefügt."
     },
+    "invalid_cultural_values": {
+        "en": "Invalid CulturalValues link.",
+        "de": "Ungültiger CulturalValues Link."
+    },
+    "successful_cultural_values": {
+        "en": "Set CulturalValues link successfully.",
+        "de": "Erfolgreich CulturalValues Link hinzugefügt."
+    },
     "invalid_political_compass": {
         "en": "Invalid political compass link.",
         "de": "Ungültiger politischer Kompass Link."
@@ -154,5 +162,53 @@
     "eight_value_societal": {
         "en": "Societal - Tradition/Progress",
         "de": "Gesellschaftlich - Tradition/Fortschritt"
+    },
+    "cultural_value_ethnic": {
+        "en": "Ethnic - Monoethnic/Multiethnic",
+        "de": "Ethnisch - Monoethnisch/Multiethnisch"
+    },
+    "cultural_value_cultural": {
+        "en": "Cultural - Monocultural/Multicultural",
+        "de": "Kulturell - Monokulturell/Multikulti"
+    },
+    "cultural_value_preference": {
+        "en": "Preference - Favouritism/Equality",
+        "de": "Vorliebe - Bevorzugung/Gleichheit"
+    },
+    "cultural_value_acceptance": {
+        "en": "Acceptance - Extinctionism/Coexistance",
+        "de": "Akzeptanz - Auslöschung/Koexistenz"
+    },
+    "cultural_value_pluralism": {
+        "en": "Pluralism - Separation/Integration",
+        "de": "Pluralismus - Aufteilung/Integrierung"
+    },
+    "cultural_value_external": {
+        "en": "External - Diplomacy/Isolation",
+        "de": "Außenwelt - Diplomatie/Isolierung"
+    },
+    "cultural_value_progression": {
+        "en": "Progression - Progression/Regression",
+        "de": "Fortschritt - Fortschrittlich/Rückschrittlich"
+    },
+    "cultural_value_technology": {
+        "en": "Technology - Transhumanism/Primitivism",
+        "de": "Technologie - Transhumanismus/Primitivismus"
+    },
+    "cultural_value_lgbt": {
+        "en": "LGBT - Pro-LGBT/Anti-LGBT",
+        "de": "LGBT - Pro-LGBT/Anti-LGBT"
+    },
+    "cultural_value_nation": {
+        "en": "Nation - Nationalism/Anationalism",
+        "de": "Volk - Nationalismus/Anationalismus"
+    },
+    "cultural_value_religion": {
+        "en": "Religion - Religion/Secular",
+        "de": "Religion - Religiös/Säkular"
+    },
+    "cultural_value_philosophy": {
+        "en": "Philosophy - Essentialism/Constructivism",
+        "de": "Philosophie - Essentialismus/Konstruktivismus"
     }
 }

@@ -77,5 +77,27 @@ class TestParser {
     return Tuple2(image, returnable);
   }
 
+  List<double>? parseCultural(Uri src) {
+    if (src.queryParameters["v1"] == null || src.queryParameters["v3"] == null || src.queryParameters["v5"] == null || src.queryParameters["v7"] == null || src.queryParameters["v9"] == null || src.queryParameters["v11"] == null || src.queryParameters["v13"] == null || src.queryParameters["v15"] == null || src.queryParameters["v17"] == null || src.queryParameters["v19"] == null || src.queryParameters["v21"] == null || src.queryParameters["v23"] == null) {
+      return null;
+    }
+
+    List<double> returnable = [];
+    returnable.add(double.parse(src.queryParameters["v1"] as String));
+    returnable.add(double.parse(src.queryParameters["v3"] as String));
+    returnable.add(double.parse(src.queryParameters["v5"] as String));
+    returnable.add(double.parse(src.queryParameters["v7"] as String));
+    returnable.add(double.parse(src.queryParameters["v9"] as String));
+    returnable.add(double.parse(src.queryParameters["v11"] as String));
+    returnable.add(double.parse(src.queryParameters["v13"] as String));
+    returnable.add(double.parse(src.queryParameters["v15"] as String));
+    returnable.add(double.parse(src.queryParameters["v17"] as String));
+    returnable.add(double.parse(src.queryParameters["v19"] as String));
+    returnable.add(double.parse(src.queryParameters["v21"] as String));
+    returnable.add(double.parse(src.queryParameters["v23"] as String));
+
+    return returnable;
+  }
+
   TestParser._internal();
 }

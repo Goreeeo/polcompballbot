@@ -8,7 +8,8 @@ final addTestCommand = SlashCommandBuilder("add_test", "Adds a test to your prof
   dozenValuesCommand,
   econValuesCommand,
   eightValuesCommand,
-  politicalCompass
+  politicalCompass,
+  culturalValuesCommand
 ],
 localizationsName: {
   Locale.german: "test_hinzufügen"
@@ -150,4 +151,31 @@ localizationsDescription: {
 
   await Database().setPoliticalCompass(event.interaction.userAuthor!.id.id, link);
   await event.respond(MessageBuilder.content(Localization().get("successful_political_compass", event.interaction.locale)));
+});
+
+final culturalValuesCommand = CommandOptionBuilder(CommandOptionType.subCommand, "culturalvalues", "Set your CulturalValues results.", 
+options: [
+  CommandOptionBuilder(CommandOptionType.string, "link", "The link to your CulturalValues.", required: true,
+  localizationsName:{
+    Locale.german: "link"
+  },
+  localizationsDescription: {
+    Locale.german: "Der Link zu deinem CulturalValues."
+  })
+],
+localizationsName: {
+  Locale.german: "culturalvalues"
+},
+localizationsDescription:{
+  Locale.german: "Fügt deinen CulturalValues test hinzu."
+})..registerHandler((event) async {
+  String link = event.getArg("link").value;
+
+  if (!link.startsWith("http://leepicsevrer.de/tests/CulturalValues/results.html?") && !link.startsWith("leepicsevrer.de/tests/CulturalValues/results.html?")) {
+    await event.respond(MessageBuilder.content(Localization().get("invalid_cultural_values", event.interaction.locale)));
+    return;
+  }
+
+  await Database().setCulturalValues(event.interaction.userAuthor!.id.id, link);
+  await event.respond(MessageBuilder.content(Localization().get("successful_cultural_values", event.interaction.locale)));
 });

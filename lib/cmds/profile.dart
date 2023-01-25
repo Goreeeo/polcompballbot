@@ -73,114 +73,147 @@ localizationsDescription:
 
   await event.respond(MessageBuilder.embed(embed));
 
+  ITextChannel channel = await event.interaction.channel.getOrDownload();
+
   if (user.dozenvalues != null) {
     List<double>? dv = TestParser().parseDozen(Uri.dataFromString(user.dozenvalues as String));
 
-    if (dv == null) return;
+    if (dv != null) {
+      EmbedBuilder embed = EmbedBuilder();
+      EmbedAuthorBuilder author = EmbedAuthorBuilder();
+      author.name = targetMember.nickname ?? targetUser.username;
+      author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
+      embed.author = author;
 
-    EmbedBuilder embed = EmbedBuilder();
-    EmbedAuthorBuilder author = EmbedAuthorBuilder();
-    author.name = targetMember.nickname ?? targetUser.username;
-    author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
-    embed.author = author;
+      embed.title = "**DozenValues**";
+      embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_ownership", event.interaction.locale), dv[0]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_market", event.interaction.locale), dv[1], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_power", event.interaction.locale), dv[2], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_autonomy", event.interaction.locale), dv[3]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_identity", event.interaction.locale), dv[4], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_progress", event.interaction.locale), dv[5], true));
 
-    embed.title = "**DozenValues**";
-    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_ownership", event.interaction.locale), dv[0]));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_market", event.interaction.locale), dv[1], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_power", event.interaction.locale), dv[2], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_autonomy", event.interaction.locale), dv[3]));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_identity", event.interaction.locale), dv[4], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("dozen_value_progress", event.interaction.locale), dv[5], true));
-
-    embed.fields.add(EmbedFieldBuilder("Link", user.dozenvalues));
-    await event.sendFollowup(MessageBuilder.embed(embed));
+      embed.fields.add(EmbedFieldBuilder("Link", user.dozenvalues));
+      await channel.sendMessage(MessageBuilder.embed(embed));
+    }
   }
 
   if (user.sapplyvalues != null) {
     List<double>? sv = TestParser().parseSapply(Uri.dataFromString(user.sapplyvalues as String));
 
-    if (sv == null) return;
+    if (sv != null) {
+      EmbedBuilder embed = EmbedBuilder();
+      EmbedAuthorBuilder author = EmbedAuthorBuilder();
+      author.name = targetMember.nickname ?? targetUser.username;
+      author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
+      embed.author = author;
 
-    EmbedBuilder embed = EmbedBuilder();
-    EmbedAuthorBuilder author = EmbedAuthorBuilder();
-    author.name = targetMember.nickname ?? targetUser.username;
-    author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
-    embed.author = author;
+      embed.title = "**SapplyValues**";
+      embed.fields.add(EmbedFieldBuilder(Localization().get("left_right", event.interaction.locale), sv[0]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("auth_lib", event.interaction.locale), sv[1], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("prog_con", event.interaction.locale), sv[2], true));
 
-    embed.title = "**SapplyValues**";
-    embed.fields.add(EmbedFieldBuilder(Localization().get("left_right", event.interaction.locale), sv[0]));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("auth_lib", event.interaction.locale), sv[1], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("prog_con", event.interaction.locale), sv[2], true));
+      embed.fields.add(EmbedFieldBuilder("Link", user.sapplyvalues));
 
-    embed.fields.add(EmbedFieldBuilder("Link", user.sapplyvalues));
-
-    await event.sendFollowup(MessageBuilder.embed(embed));
+      await channel.sendMessage(MessageBuilder.embed(embed));
+    }
   }
 
   if (user.econvalues != null) {
     List<double>? ev = TestParser().parseEcon(Uri.dataFromString(user.econvalues as String));
 
-    if (ev == null) return;
+    if (ev != null) {
+      EmbedBuilder embed = EmbedBuilder();
+      EmbedAuthorBuilder author = EmbedAuthorBuilder();
+      author.name = targetMember.nickname ?? targetUser.username;
+      author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
+      embed.author = author;
 
-    EmbedBuilder embed = EmbedBuilder();
-    EmbedAuthorBuilder author = EmbedAuthorBuilder();
-    author.name = targetMember.nickname ?? targetUser.username;
-    author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
-    embed.author = author;
+      embed.title = "**EconValues**";
+      embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_incentive", event.interaction.locale), ev[0]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_structure", event.interaction.locale), ev[1], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_intervention", event.interaction.locale), ev[2], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_centralisation", event.interaction.locale), ev[3]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_technology", event.interaction.locale), ev[4], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_land", event.interaction.locale), ev[5], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_inheritance", event.interaction.locale), ev[6]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_labor", event.interaction.locale), ev[7], true));
+      embed.fields.add(EmbedFieldBuilder("Link", user.econvalues));
 
-    embed.title = "**EconValues**";
-    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_incentive", event.interaction.locale), ev[0]));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_structure", event.interaction.locale), ev[1], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_intervention", event.interaction.locale), ev[2], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_centralisation", event.interaction.locale), ev[3]));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_technology", event.interaction.locale), ev[4], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_land", event.interaction.locale), ev[5], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_inheritance", event.interaction.locale), ev[6]));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("econ_value_labor", event.interaction.locale), ev[7], true));
-    embed.fields.add(EmbedFieldBuilder("Link", user.econvalues));
-
-    await event.sendFollowup(MessageBuilder.embed(embed));
+      await channel.sendMessage(MessageBuilder.embed(embed));
+    }
   }
 
   if (user.eightvalues != null) {
-    List<double>? ev = TestParser().parseEcon(Uri.dataFromString(user.eightvalues as String));
+    List<double>? ev = TestParser().parseEight(Uri.dataFromString(user.eightvalues as String));
 
-    if (ev == null) return;
+    if (ev != null) {
+      EmbedBuilder embed = EmbedBuilder();
+      EmbedAuthorBuilder author = EmbedAuthorBuilder();
+      author.name = targetMember.nickname ?? targetUser.username;
+      author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
+      embed.author = author;
 
-    EmbedBuilder embed = EmbedBuilder();
-    EmbedAuthorBuilder author = EmbedAuthorBuilder();
-    author.name = targetMember.nickname ?? targetUser.username;
-    author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
-    embed.author = author;
+      embed.title = "**EightValues**";
+      embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_economic", event.interaction.locale), ev[0]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_diplomacy", event.interaction.locale), ev[1], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_civil", event.interaction.locale), ev[2], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_societal", event.interaction.locale), ev[3], true));
+      embed.fields.add(EmbedFieldBuilder("Link", user.eightvalues));
 
-    embed.title = "**EightValues**";
-    embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_economic", event.interaction.locale), ev[0]));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_diplomacy", event.interaction.locale), ev[1], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_civil", event.interaction.locale), ev[2], true));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("eight_value_societal", event.interaction.locale), ev[3], true));
-    embed.fields.add(EmbedFieldBuilder("Link", user.eightvalues));
+      await channel.sendMessage(MessageBuilder.embed(embed));
+    }
+  }
 
-    await event.sendFollowup(MessageBuilder.embed(embed));
+  if (user.culturalvalues != null) {
+    List<double>? cv = TestParser().parseCultural(Uri.dataFromString(user.culturalvalues as String));
+
+    if (cv != null) {
+      EmbedBuilder embed = EmbedBuilder();
+      EmbedAuthorBuilder author = EmbedAuthorBuilder();
+      author.name = targetMember.nickname ?? targetUser.username;
+      author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
+      embed.author = author;
+      
+      embed.title = "**CulturalValues**";
+      
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_ethnic", event.interaction.locale), cv[0]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_cultural", event.interaction.locale), cv[1], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_preference", event.interaction.locale), cv[2], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_acceptance", event.interaction.locale), cv[3]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_pluralism", event.interaction.locale), cv[4], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_external", event.interaction.locale), cv[5], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_progression", event.interaction.locale), cv[6]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_technology", event.interaction.locale), cv[7], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_lgbt", event.interaction.locale), cv[8], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_nation", event.interaction.locale), cv[9]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_religion", event.interaction.locale), cv[10], true));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("cultural_value_philosophy", event.interaction.locale), cv[11], true));
+
+      embed.fields.add(EmbedFieldBuilder("Link", user.culturalvalues));
+
+      await channel.sendMessage(MessageBuilder.embed(embed));
+    }
   }
 
   if (user.politicalcompass != null) {
     Tuple2<String, List<double>>? pc = TestParser().parseCompass(Uri.dataFromString(user.politicalcompass as String));
 
-    if (pc == null) return;
+    if (pc != null) {
+      EmbedBuilder embed = EmbedBuilder();
+      EmbedAuthorBuilder author = EmbedAuthorBuilder();
+      author.name = targetMember.nickname ?? targetUser.username;
+      author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
+      embed.author = author;
+      embed.imageUrl = pc.item1;
 
-    EmbedBuilder embed = EmbedBuilder();
-    EmbedAuthorBuilder author = EmbedAuthorBuilder();
-    author.name = targetMember.nickname ?? targetUser.username;
-    author.iconUrl = targetMember.avatarURL() ?? targetUser.avatarURL();
-    embed.author = author;
-    embed.imageUrl = pc.item1;
+      embed.title = "**Political Compass**";
+      embed.fields.add(EmbedFieldBuilder(Localization().get("left_right", event.interaction.locale), pc.item2[0]));
+      embed.fields.add(EmbedFieldBuilder(Localization().get("auth_lib", event.interaction.locale), pc.item2[1], true));
 
-    embed.title = "**Political Compass**";
-    embed.fields.add(EmbedFieldBuilder(Localization().get("left_right", event.interaction.locale), pc.item2[0]));
-    embed.fields.add(EmbedFieldBuilder(Localization().get("auth_lib", event.interaction.locale), pc.item2[1], true));
+      embed.fields.add(EmbedFieldBuilder("Link", user.politicalcompass));
 
-    embed.fields.add(EmbedFieldBuilder("Link", user.politicalcompass));
-
-    await event.sendFollowup(MessageBuilder.embed(embed));
+      await channel.sendMessage(MessageBuilder.embed(embed));
+    }
   }
 });

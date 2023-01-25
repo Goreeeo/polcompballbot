@@ -70,6 +70,12 @@ class Database extends _$Database {
     return into(users).insertOnConflictUpdate(user);
   }
 
+  Future setCulturalValues(int userid, String link) {
+    User user = User(id: userid, culturalvalues: link);
+
+    return into(users).insertOnConflictUpdate(user);
+  }
+
   Future setIdeology(int userId, int ideology) {
     User user = User(id: userId, ideology: ideology);
 
