@@ -1,0 +1,7 @@
+{
+    "add_test": "add_test_help",
+    "help": "help_help",
+    "profile": "profile_help",
+    "set_ideology": "set_ideology_help",
+    "set_region": "set_region_help"
+}

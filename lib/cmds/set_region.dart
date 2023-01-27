@@ -23,7 +23,7 @@ localizationsDescription:
 {
   Locale.german: "Ändert deine Ursprungsregion."
 })..registerHandler((event) async {
-  String region = event.getArg("region").value;
+  String region = event.getArg("region").value.toString().toLowerCase();
 
   if (Countries().get(region) == null) {
     await event.respond(MessageBuilder.content(Localization().get("region_code_not_found", event.interaction.locale)));

@@ -20,15 +20,15 @@ localizationsDescription:
 {
   Locale.german: "Ändert deine Ideologie."
 })..registerHandler((event) async {
-  String ideology = event.getArg("ideology").value;
+  String ideology = event.getArg("link").value;
 
   await Database().setIdeology(event.interaction.userAuthor!.id.id, ideology);
   switch (event.interaction.locale) {
     case "de":
-      await event.respond(MessageBuilder.content("Ideologie wurde zu ${event.getArg("ideology").value} gesetzt."));
+      await event.respond(MessageBuilder.content("Ideologie wurde zu ${event.getArg("link").value} gesetzt."));
       break;
     default:
-      await event.respond(MessageBuilder.content("Ideology set to ${event.getArg("ideology").value}."));
+      await event.respond(MessageBuilder.content("Ideology set to ${event.getArg("link").value}."));
       break;
   }
 });

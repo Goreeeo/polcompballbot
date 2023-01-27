@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_interactions/nyxx_interactions.dart';
+import 'package:polcompballbot/cmds/help.dart';
 import "package:polcompballbot/managers/environment.dart";
 import 'package:polcompballbot/cmds/profile.dart';
 import 'package:polcompballbot/cmds/add_test.dart';
@@ -34,6 +35,7 @@ void main() {
         ..registerSlashCommand(profileCommand)
         ..registerSlashCommand(setRegionCommand)
         ..registerSlashCommand(addTestCommand)
+        ..registerSlashCommand(helpCommand)
         ..syncOnReady();
     });
   });

@@ -214,5 +214,29 @@
     "no_dm_support": {
         "en": "This command can't be executed in DMs, please perform it in a server.",
         "de": "Dieser command kann nicht innerhalb einer DM ausgeführt werden, bitte führe ihn in einem Server aus."
+    },
+    "add_test_help": {
+        "en": "add_test <test> <link> - This commands adds one of several online tests to be displayed to the profile.",
+        "de": "test_hinzufügen <test> <link> - Dieser Command fügt einen Online-Test zu deinem Profil hinzu."
+    },
+    "help_help": {
+        "en": "help - This command shows the functionality of each command.",
+        "de": "hilfe - Dieser Command zeigt die Funktionalität von jedem Command."
+    },
+    "profile_help": {
+        "en": "profile <user> - Shows a user's profile.",
+        "de": "profil <nutzer> - Zeigt das Profil eines Nutzers."
+    },
+    "set_ideology_help": {
+        "en": "set_ideology <link> - This command sets your ideology using PCB or PCBA.",
+        "de": "wähle_ideologie <link> - Dieser Command fügt deine Ideologie hinzu von PCB oder PCBA."
+    },
+    "set_region_help": {
+        "en": "set_region <region_code> - This command sets the region you live in.",
+        "de": "ändere_region <region_code> - Dieser Command ändert die Region in der du lebst."
+    },
+    "help_issue": {
+        "en": "There was an issue getting the commands.",
+        "de": "Es gab ein Problem auf die Commands zuzugreifen."
     }
 }
